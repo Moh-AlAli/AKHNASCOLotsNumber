@@ -7,8 +7,8 @@
     <ProjectGuid>{9B285F5B-3D7A-46CA-AB86-CAA33126840F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <StartupObject>Sub Main</StartupObject>
-    <RootNamespace>SMDailyInvoice</RootNamespace>
-    <AssemblyName>SMDailyInvoice</AssemblyName>
+    <RootNamespace>LotsNumber</RootNamespace>
+    <AssemblyName>LotsNumber</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsFormsWithCustomSubMain</MyType>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
@@ -20,8 +20,8 @@
     <DebugType>full</DebugType>
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
-    <OutputPath>bin\Debug\SMDailyInvoice\</OutputPath>
-    <DocumentationFile>SMDailyInvoice.xml</DocumentationFile>
+    <OutputPath>bin\Debug\LotsNumber\</OutputPath>
+    <DocumentationFile>LotsNumber.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -31,7 +31,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\SMDailyInvoice\</OutputPath>
-    <DocumentationFile>SMDailyInvoice.xml</DocumentationFile>
+    <DocumentationFile>LotsNumber.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
@@ -120,11 +120,11 @@
     <Compile Include="ctControls.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="dailyinv.vb">
+    <Compile Include="srclotnum.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dailyinv.Designer.vb">
-      <DependentUpon>dailyinv.vb</DependentUpon>
+    <Compile Include="srclotnum.Designer.vb">
+      <DependentUpon>srclotnum.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmLogin.Designer.vb">
@@ -162,8 +162,8 @@
     <EmbeddedResource Include="crviewer.resx">
       <DependentUpon>crviewer.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dailyinv.resx">
-      <DependentUpon>dailyinv.vb</DependentUpon>
+    <EmbeddedResource Include="srclotnum.resx">
+      <DependentUpon>srclotnum.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmLogin.resx">
       <DependentUpon>FrmLogin.vb</DependentUpon>

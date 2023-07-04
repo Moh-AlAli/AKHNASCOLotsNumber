@@ -32,7 +32,7 @@ Friend Class Program
                 Dim login As DialogResult = lofrm.ShowDialog()
 
                 If login = DialogResult.OK Then
-                    Dim frmm As dailyinv = New dailyinv(lofrm.ERPSession, lofrm.Company, lofrm.SesDate)
+                    Dim frmm As srclotnum = New srclotnum(lofrm.ERPSession, lofrm.Company, lofrm.SesDate)
                     Application.Run(frmm)
                 Else
                     Application.[Exit]()
@@ -49,11 +49,11 @@ Friend Class Program
 
                 Dim ms As String = "Sage 300 ERP Error: " & erstr
                 ses.Dispose()
-                MessageBox.Show(ms, "Invoice Daily", MessageBoxButtons.OK, MessageBoxIcon.[Error])
+                MessageBox.Show(ms, "Lot Number", MessageBoxButtons.OK, MessageBoxIcon.[Error])
                 Application.[Exit]()
             End Try
         Else
-            Dim frm As dailyinv = New dailyinv(args(0))
+            Dim frm As srclotnum = New srclotnum(args(0))
             Application.Run(frm)
         End If
     End Sub

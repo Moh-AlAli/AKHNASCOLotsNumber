@@ -17,10 +17,12 @@ Friend Class crviewer
     Private ccompname As String
     Private cfdate As String
     Private ctdate As String
-    Private cfrmcust As String
-    Private ctocust As String
+    Private cfrminvno As String
+    Private ctoinvno As String
+    Private cfrmlot As String
+    Private ctolot As String
     Private crbinv As Boolean
-    Private crbcrn As Boolean
+    Private crblot As Boolean
 
     Friend Property ObjectHandle As String
     Friend Function createdes(ByVal key As String) As TripleDES
@@ -58,17 +60,19 @@ Friend Class crviewer
 
         Return cons
     End Function
-    Public Sub New(ByVal _objectHandle As String, ByVal _sess As acc.Session, ByVal fdate As String, ByVal tdate As String, ByVal frmcust As String, ByVal tocust As String, ByVal rbinv As Boolean, ByVal rbcrn As Boolean)
+    Public Sub New(ByVal _objectHandle As String, ByVal _sess As acc.Session, ByVal fdate As String, ByVal tdate As String, ByVal frminvno As String, ByVal toinvno As String, ByVal fromlot As String, ByVal tolot As String, ByVal rbinv As Boolean, ByVal rblot As Boolean)
         InitializeComponent()
         ObjectHandle = _objectHandle
         ccompid = _sess.CompanyID
         ccompname = _sess.CompanyName
         cfdate = fdate
         ctdate = tdate
-        cfrmcust = frmcust
-        ctocust = tocust
+        cfrminvno = frminvno
+        ctoinvno = toinvno
+        cfrmlot = cfrmlot
+        ctolot = tolot
         crbinv = rbinv
-        crbcrn = rbcrn
+        crblot = rblot
 
 
     End Sub
@@ -79,17 +83,11 @@ Friend Class crviewer
     End Sub
 
     Private Sub CrystalReportViewer1_Load(sender As Object, e As EventArgs) Handles cryviewer.Load
-
         Try
-
-            Dim type As Integer
-
             If crbinv = True Then
-                type = 0
-                rdoc.Load("reports\ARDLYINVRPT.rpt")
-            ElseIf crbcrn = True Then
-                type = 1
-                rdoc.Load("reports\ARDLYCRDRRPT.rpt")
+                rdoc.Load("reports\invoicesLotnumber.rpt")
+            ElseIf crblot = True Then
+                rdoc.Load("reports\Lotsalesbyinvoices.rpt")
             End If
 
 
@@ -117,10 +115,12 @@ Friend Class crviewer
 
             rdoc.SetParameterValue("FrmDate", fdate)
             rdoc.SetParameterValue("Todate", tdate)
-            rdoc.SetParameterValue("FRMCUST", cfrmcust)
-            rdoc.SetParameterValue("TOCUST", ctocust)
+            rdoc.SetParameterValue("Frminvno", cfrminvno)
+            rdoc.SetParameterValue("Toinvno", ctoinvno)
+            rdoc.SetParameterValue("Frmlot", cfrmlot)
+            rdoc.SetParameterValue("Tolot", ctolot)
             rdoc.SetParameterValue("CONAME", ccompname)
-            rdoc.SetParameterValue("type", type)
+
 
             cryviewer.ReportSource = rdoc
 

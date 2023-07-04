@@ -3,7 +3,7 @@ Imports acc = ACCPAC.Advantage
 Imports System.Runtime.InteropServices
 
 
-Friend Class dailyinv
+Friend Class srclotnum
 
 
     Public compid As String = ""
@@ -77,7 +77,7 @@ Friend Class dailyinv
 
 
                 End If
-                Txtfrmcus.Text = s(0)
+                Txtfrminvno.Text = s(0)
             Case "Txttocus"
 
                 If _oldVendNumb.Trim() <> txb.Text.Trim() Then
@@ -106,7 +106,7 @@ Friend Class dailyinv
                 End If
 
 
-                Txttocus.Text = s(0)
+                Txttoinvno.Text = s(0)
                 ' End If
         End Select
     End Sub
@@ -187,10 +187,10 @@ Friend Class dailyinv
             If Not ObjectHandle Is Nothing Then
                 SessionFromERP(Handle)
             End If
-            Txttocus.Text = "zzzzzzzzzzzzzzzzzzzzzz"
+            Txttoinvno.Text = "zzzzzzzzzzzzzzzzzzzzzz"
 
 
-            rbinv.Checked = True
+            rblot.Checked = True
 
         Catch ex As Exception
             MessageBox.Show(ex.Message)
@@ -198,27 +198,6 @@ Friend Class dailyinv
         End Try
     End Sub
 
-
-    Private Sub bffind_Click(sender As Object, e As EventArgs) Handles bffind.Click
-        Dim f As FromFinder = New FromFinder("ARCUS", "Customer", New String() {"IDCUST", "NAMECUST"}, ERPSession, "", "")
-
-        Dim r As DialogResult = f.ShowDialog(Me)
-        If r = DialogResult.OK Then
-            Txtfrmcus.Text = f.Result.ToArray()(0)
-            Txttocus.Text = f.Result.ToArray()(0)
-            fndEditBoxValidate(Txtfrmcus, EventArgs.Empty)
-        End If
-    End Sub
-
-    Private Sub btfind_Click(sender As Object, e As EventArgs) Handles btfind.Click
-        Dim f As FromFinder = New FromFinder("ARCUS", "Customer", New String() {"IDCUST", "NAMECUST"}, ERPSession, "", "")
-        Dim r As DialogResult = f.ShowDialog(Me)
-        If r = DialogResult.OK Then
-            Txttocus.Text = f.Result.ToArray()(0)
-            fndEditBoxValidate(Txttocus, EventArgs.Empty)
-        End If
-
-    End Sub
     Private Sub CMDCloseClick(sender As Object, e As EventArgs) Handles CMDClose.Click
         Close()
     End Sub
@@ -256,25 +235,74 @@ Friend Class dailyinv
 
             tdate = DateTimePicker2.Value.Year & tmonthnew & tdaynew
 
-            Dim tocust As String = ""
-            If Txttocus.Text = Nothing Then
-                tocust = "zzzzzzzzzzzzzzzzzzzzzz"
+            Dim toinvno As String = ""
+            If Txttoinvno.Text = Nothing Then
+                toinvno = "zzzzzzzzzzzzzzzzzzzzzz"
             Else
-                tocust = Trim(Txttocus.Text)
+                toinvno = Trim(Txttoinvno.Text)
             End If
-            If Trim(Txtfrmcus.Text) <= Trim(Txttocus.Text) Then
+            Dim tolot As String = ""
+            If txttolot.Text = Nothing Then
+                tolot = "zzzzzzzzzzzzzzzzzzzzzz"
+            Else
+                tolot = Trim(txttolot.Text)
+            End If
+
+            If Trim(Txtfrminvno.Text) <= Trim(Txttoinvno.Text) Then
                 If fdate <= tdate Then
-                    Dim f As crviewer = New crviewer(ObjectHandle, ERPSession, fdate, tdate, Txtfrmcus.Text, Txttocus.Text, rbinv.Checked, rbcrdb.Checked)
-                    f.Show()
+                    If Trim(txtfrmlot.Text) <= Trim(txttolot.Text) Then
+                        Dim f As crviewer = New crviewer(ObjectHandle, ERPSession, fdate, tdate, Trim(Txtfrminvno.Text), toinvno, Trim(txtfrmlot.Text), tolot, rblot.Checked, rbinv.Checked)
+                        f.Show()
+                    Else
+                        MessageBox.Show("From Lot No greater than To Lot No")
+                    End If
                 Else
                     MessageBox.Show("From Date  greater than To Date")
                 End If
             Else
-                MessageBox.Show("From Customer No greater than To Customer No")
+                MessageBox.Show("From Invoice No greater than To Invoice No")
             End If
 
         Catch ex As Exception
             MessageBox.Show(ex.Message)
         End Try
+    End Sub
+
+    Private Sub Bffind_Click(sender As Object, e As EventArgs) Handles Bffind.Click
+        Dim f As FromFinder = New FromFinder("OEINVH", "Invoices", New String() {"INVNUMBER"}, ERPSession, "", "")
+
+        Dim r As DialogResult = f.ShowDialog(Me)
+        If r = DialogResult.OK Then
+            Txtfrminvno.Text = f.Result.ToArray()(0)
+            Txttoinvno.Text = f.Result.ToArray()(0)
+            fndEditBoxValidate(Txtfrminvno, EventArgs.Empty)
+        End If
+    End Sub
+
+    Private Sub Btfind_Click(sender As Object, e As EventArgs) Handles Btfind.Click
+        Dim f As FromFinder = New FromFinder("OEINVH", "Invoices", New String() {"INVNUMBER"}, ERPSession, "", "")
+        Dim r As DialogResult = f.ShowDialog(Me)
+        If r = DialogResult.OK Then
+            Txttoinvno.Text = f.Result.ToArray()(0)
+            fndEditBoxValidate(Txttoinvno, EventArgs.Empty)
+        End If
+    End Sub
+
+    Private Sub pbflot_Click(sender As Object, e As EventArgs) Handles pbflot.Click
+        Dim f As FromFinder = New FromFinder("ICXLHIS", "Lots", New String() {"LOTNUM"}, ERPSession, "", "")
+        Dim r As DialogResult = f.ShowDialog(Me)
+        If r = DialogResult.OK Then
+            txtfrmlot.Text = f.Result.ToArray()(0)
+            fndEditBoxValidate(txtfrmlot, EventArgs.Empty)
+        End If
+    End Sub
+
+    Private Sub pbtlot_Click(sender As Object, e As EventArgs) Handles pbtlot.Click
+        Dim f As FromFinder = New FromFinder("ICXLHIS", "Lots", New String() {"LOTNUM"}, ERPSession, "", "")
+        Dim r As DialogResult = f.ShowDialog(Me)
+        If r = DialogResult.OK Then
+            txttolot.Text = f.Result.ToArray()(0)
+            fndEditBoxValidate(txttolot, EventArgs.Empty)
+        End If
     End Sub
 End Class

@@ -183,8 +183,10 @@ Friend Enum RecordType
             fields = f.ToArray()
 
         Select Case entity
-            Case "ARCUS"
-                rt = If(setTo250 = False, "select " & ff.Substring(0, ff.Length - 1) & " from ARCUS", "select top 250 " & ff.Substring(0, ff.Length - 1) & " from ARCUS")
+            Case "OEINVH"
+                rt = If(setTo250 = False, "select " & ff.Substring(0, ff.Length - 1) & " from OEINVH", "select top 250 " & ff.Substring(0, ff.Length - 1) & " from OEINVH")
+            Case "ICXLHIS"
+                rt = If(setTo250 = False, "select " & ff.Substring(0, ff.Length - 1) & " from ICXLHIS  where ICXLHIS.TRANSTYPE=4", "select top 250 " & ff.Substring(0, ff.Length - 1) & " from ICXLHIS where ICXLHIS.TRANSTYPE=4")
         End Select
 
         Return rt

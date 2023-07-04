@@ -47,17 +47,23 @@ Partial Class FromFinder
         _iniFilter = iniFilter
         Dim cols As ColumnHeader() = New ColumnHeader() {}
         Select Case _entity
-            Case "ARCUS"
+            Case "OEINVH"
 
                 cols = New ColumnHeader() {New ColumnHeader() With {
-                        .Text = "Customer Number",
+                        .Text = "Invoice Number",
                         .Width = 200
-                    }, New ColumnHeader() With {
-                        .Text = "Customer Name",
-                        .Width = 300
                     }}
                 lstData.Items.Add(New ListViewItem(New String() {" ", " "}))
-                cmbFindBy.Items.AddRange(New LookupItem() {New LookupItem("Show All Records", "C", "ALL"), New LookupItem("Customer Number", "C", "IDCUST"), New LookupItem("Customer Name", "C", "NAMECUST")})
+                cmbFindBy.Items.AddRange(New LookupItem() {New LookupItem("Show All Records", "C", "ALL"), New LookupItem("Invoice Number", "C", "INVNUMBER")})
+                Exit Select
+            Case "ICXLHIS"
+
+                cols = New ColumnHeader() {New ColumnHeader() With {
+                        .Text = "Lot Number",
+                        .Width = 200
+                    }}
+                lstData.Items.Add(New ListViewItem(New String() {" ", " "}))
+                cmbFindBy.Items.AddRange(New LookupItem() {New LookupItem("Show All Records", "C", "ALL"), New LookupItem("Lot Number", "C", "LOTNUM")})
                 Exit Select
         End Select
         Text = capt
@@ -101,7 +107,7 @@ Partial Class FromFinder
         Dim msg As String = FindEx(_entity, fil, data, iniz)
 
         If msg.Length <> 0 Then
-            MessageBox.Show(Me, msg, "Customer Statement", MessageBoxButtons.OK, MessageBoxIcon.[Error])
+            MessageBox.Show(Me, msg, "Lot Number", MessageBoxButtons.OK, MessageBoxIcon.[Error])
             Return
         End If
 
@@ -316,10 +322,6 @@ Partial Class FromFinder
             Return ms
         End Try
     End Function
-
-
-
-
 
     Private Sub lstData_DoubleClick(sender As Object, e As EventArgs) Handles lstData.DoubleClick
         SetResult()
