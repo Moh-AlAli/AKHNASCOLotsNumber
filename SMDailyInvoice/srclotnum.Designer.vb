@@ -286,7 +286,7 @@ Partial Class srclotnum
         Me.Controls.Add(Me.GroupBox1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "srclotnum"
-        Me.Text = "Invoice Daily"
+        Me.Text = "Lots Number"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         CType(Me.pbtlot, System.ComponentModel.ISupportInitialize).EndInit()
