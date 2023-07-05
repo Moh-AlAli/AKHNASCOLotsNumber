@@ -85,9 +85,9 @@ Friend Class crviewer
     Private Sub CrystalReportViewer1_Load(sender As Object, e As EventArgs) Handles cryviewer.Load
         Try
             If crbinv = True Then
-                rdoc.Load("reports\invoicesLotnumber.rpt")
-            ElseIf crblot = True Then
                 rdoc.Load("reports\Lotsalesbyinvoices.rpt")
+            ElseIf crblot = True Then
+                rdoc.Load("reports\invoicesLotnumber.rpt")
             End If
 
 
@@ -113,12 +113,12 @@ Friend Class crviewer
                 TAB.ApplyLogOnInfo(tablog)
             Next
 
-            rdoc.SetParameterValue("FrmDate", fdate)
-            rdoc.SetParameterValue("Todate", tdate)
-            rdoc.SetParameterValue("Frminvno", cfrminvno)
-            rdoc.SetParameterValue("Toinvno", ctoinvno)
-            rdoc.SetParameterValue("Frmlot", cfrmlot)
-            rdoc.SetParameterValue("Tolot", ctolot)
+            rdoc.SetParameterValue("aFrmDate", "'" & fdate & "'")
+            rdoc.SetParameterValue("aTodate", "'" & tdate & "'")
+            rdoc.SetParameterValue("bFrminvno", "'" & cfrminvno & "'")
+            rdoc.SetParameterValue("bToinvno", "'" & ctoinvno & "'")
+            rdoc.SetParameterValue("cFrmlot", "'" & cfrmlot & "'")
+            rdoc.SetParameterValue("cTolot", "'" & ctolot & "'")
             rdoc.SetParameterValue("CONAME", ccompname)
 
 

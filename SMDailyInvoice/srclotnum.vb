@@ -251,7 +251,7 @@ Friend Class srclotnum
             If Trim(Txtfrminvno.Text) <= Trim(Txttoinvno.Text) Then
                 If fdate <= tdate Then
                     If Trim(txtfrmlot.Text) <= Trim(txttolot.Text) Then
-                        Dim f As crviewer = New crviewer(ObjectHandle, ERPSession, fdate, tdate, Trim(Txtfrminvno.Text), toinvno, Trim(txtfrmlot.Text), tolot, rblot.Checked, rbinv.Checked)
+                        Dim f As crviewer = New crviewer(ObjectHandle, ERPSession, fdate, tdate, Trim(Txtfrminvno.Text), toinvno, Trim(txtfrmlot.Text), tolot, rbinv.Checked, rblot.Checked)
                         f.Show()
                     Else
                         MessageBox.Show("From Lot No greater than To Lot No")
