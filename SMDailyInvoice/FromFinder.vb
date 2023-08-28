@@ -91,7 +91,7 @@ Partial Class FromFinder
         If chkAutoSearch.Checked Then FillData("")
     End Sub
 
-    Private Sub FillData(ByVal iniFilter As String, ByVal Optional iniz As Boolean = False)
+    Private Sub FillData(ByVal iniFilter As String, ByVal Optional iniz As Boolean = True)
         lstData.Items.Clear()
         Dim dff As String = ""
 
