@@ -1,5 +1,6 @@
 ﻿Imports CrystalDecisions.CrystalReports.Engine
 Imports CrystalDecisions.Shared
+Imports CrystalDecisions.Windows.Forms
 Imports System.Security.Cryptography
 Imports System.IO
 Imports System.Text
@@ -82,8 +83,15 @@ Friend Class crviewer
         ObjectHandle = _objectHandle
     End Sub
 
-    Private Sub CrystalReportViewer1_Load(sender As Object, e As EventArgs) Handles cryviewer.Load
+
+    Private Sub crviewer_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
+            Dim crv As New CrystalReportViewer
+            crv.Dock = DockStyle.Fill
+            crv.BorderStyle = BorderStyle.None
+            crv.ExportReport()
+            Me.Controls.Add(crv)
+
             If crbinv = True Then
                 rdoc.Load("reports\Lotsalesbyinvoices.rpt")
             ElseIf crblot = True Then
@@ -122,7 +130,7 @@ Friend Class crviewer
             rdoc.SetParameterValue("CONAME", ccompname)
 
 
-            cryviewer.ReportSource = rdoc
+            crv.ReportSource = rdoc
 
 
         Catch ex As Exception
@@ -133,7 +141,4 @@ Friend Class crviewer
             End If
         End Try
     End Sub
-
-
-
 End Class
